@@ -31,9 +31,9 @@ template "/etc/mailname" do
 end
 
 if node[:exim4][:encrypted][:enabled]
-  encrypted = Chef::EncryptedDataBagItem.load(node[:exim4][:encrypted][:bag], node[:exim4][:encrypted][:item])
-  login = encrypted["smarthost_login"]
-  pwd = encrypted["smarthost_pwd"]
+  data = data_bag_item(node[:exim4][:encrypted][:bag], node[:exim4][:encrypted][:item])
+  login = data["smarthost_login"]
+  pwd = data["smarthost_pwd"]
 else
   login = node[:exim4][:smarthost_login]
   pwd = node[:exim4][:smarthost_pwd]
